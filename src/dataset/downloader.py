@@ -64,7 +64,7 @@ def main (args):
     args = getopt.parse_args()
 
     if not args.all and not args.lb3 and not args.sen and not args.vel and not args.gt and not args.gt_cov:
-        print "No data type specified. Use --help to see options."
+        print("No data type specified. Use --help to see options.")
 
     for date in dates:
         if args.date is not None and args.date != date:
@@ -74,42 +74,42 @@ def main (args):
             cmd = ['wget', '--continue',
                    '%s/images/%s_lb3.tar.gz' % (base_dir, date),
                    '-P', 'images']
-            print "Calling: ", ' '.join(cmd)
+            print("Calling: ", ' '.join(cmd))
             subprocess.call(cmd)
         if args.sen or args.all:
             ensure_output_dir('sensor_data')
             cmd = ['wget', '--continue',
                    '%s/sensor_data/%s_sen.tar.gz' % (base_dir, date),
                    '-P', 'sensor_data']
-            print "Calling: ", ' '.join(cmd)
+            print("Calling: ", ' '.join(cmd))
             subprocess.call(cmd)
         if args.vel or args.all:
             ensure_output_dir('velodyne_data')
             cmd = ['wget', '--continue',
                    '%s/velodyne_data/%s_vel.tar.gz' % (base_dir, date),
                    '-P', 'velodyne_data']
-            print "Calling: ", ' '.join(cmd)
+            print("Calling: ", ' '.join(cmd))
             subprocess.call(cmd)
         if args.hokuyo or args.all:
             ensure_output_dir('hokuyo_data')
             cmd = ['wget', '--continue',
                    '%s/hokuyo_data/%s_hokuyo.tar.gz' % (base_dir, date),
                    '-P', 'hokuyo_data']
-            print "Calling: ", ' '.join(cmd)
+            print("Calling: ", ' '.join(cmd))
             subprocess.call(cmd)
         if args.gt or args.all:
             ensure_output_dir('ground_truth')
             cmd = ['wget', '--continue',
                    '%s/ground_truth/groundtruth_%s.csv' % (base_dir, date),
                    '-P', 'ground_truth']
-            print "Calling: ", ' '.join(cmd)
+            print("Calling: ", ' '.join(cmd))
             subprocess.call(cmd)
         if args.gt_cov or args.all:
             ensure_output_dir('ground_truth_cov')
             cmd = ['wget', '--continue',
                    '%s/covariance/cov_%s.csv' % (base_dir, date),
                    '-P', 'ground_truth_cov']
-            print "Calling: ", ' '.join(cmd)
+            print("Calling: ", ' '.join(cmd))
             subprocess.call(cmd)
 
     return 0

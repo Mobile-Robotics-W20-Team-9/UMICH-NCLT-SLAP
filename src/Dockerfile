@@ -16,7 +16,4 @@ RUN pip install -U pip && \
         setuptools \
         pylint
 
-RUN pip install -U \
-        python-pcl
-
 CMD ["/bin/bash"]
