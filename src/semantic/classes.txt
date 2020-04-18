@@ -1,0 +1,9 @@
+adverse_drug
+blood_pressure
+blood_pressure_search
+goodbye
+greeting
+hospital_search
+options
+pharmacy_search
+thanks
