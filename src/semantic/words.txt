@@ -85,3 +85,8 @@ what
 which
 with
 you
+navigation
+map
+locate
+navigate
+building

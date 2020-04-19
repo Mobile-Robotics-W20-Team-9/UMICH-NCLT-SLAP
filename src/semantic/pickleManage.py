@@ -21,11 +21,8 @@ def updatePickle(filename, pklList):
     pickle_in = open(filename + '.pkl',"rb")
     currDict = pickle.load(pickle_in)
     f = open(filename + '.pkl', 'wb')   # Pickle file is newly created where foo1.py is
-    pickle.dump(currDict|pklList, f)          # dump data to f
+    pickle.dump(currDict + pklList, f)          # dump data to f
     f.close()
-
-printPickle("classes")
-printPickle("words")
 
 # Example usage
 #   createPickle('test', {'Bart', 'Lisa', 'Milhouse', 'Nelson'})

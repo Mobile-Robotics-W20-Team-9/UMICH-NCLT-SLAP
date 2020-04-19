@@ -1,8 +1,11 @@
+# from python example and tutorial here: https://data-flair.training/blogs/python-chatbot-project/
+
 import nltk
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import pickle
 import numpy as np
+import spacy
 
 from keras.models import load_model
 model = load_model('chatbot_model.h5')
@@ -11,7 +14,6 @@ import random
 intents = json.loads(open('intents.json').read())
 words = pickle.load(open('words.pkl','rb'))
 classes = pickle.load(open('classes.pkl','rb'))
-
 
 def clean_up_sentence(sentence):
     # tokenize the pattern - splitting words into array
@@ -26,10 +28,10 @@ def bag_of_words(sentence, words, show_details=True):
     # tokenizing patterns
     sentence_words = clean_up_sentence(sentence)
     # bag of words - vocabulary matrix
-    bag = [0]*len(words)  
+    bag = [0]*len(words)
     for s in sentence_words:
         for i,word in enumerate(words):
-            if word == s: 
+            if word == s:
                 # assign 1 if current word is in the vocabulary position
                 bag[i] = 1
                 if show_details:
@@ -52,11 +54,35 @@ def predict_class(sentence):
 def getResponse(ints, intents_json):
     tag = ints[0]['intent']
     list_of_intents = intents_json['intents']
+    print("ints")
+    print(ints)
     for i in list_of_intents:
         if(i['tag']== tag):
             result = random.choice(i['responses'])
             break
     return result
+
+def getInfo(sentence):
+    doc = nlp(sentence)
+    start = 0
+    end = 0
+    startBuilding = "random location"
+    stopBuilding = "random location"
+    for token in doc:
+        if token.pos_ == "PROPN" and start == 1:
+            startBuilding = token.text
+        elif token.pos_ == "PROPN" and end == 1:
+            stopBuilding = token.text
+        elif token.text == "to":
+            start = 0
+            end = 1
+        elif token.text == "from":
+            start = 1
+            end = 0
+        else:
+            pass
+            # print(token.text)
+    return [startBuilding, stopBuilding]
 
 
 #Creating tkinter GUI
@@ -64,27 +90,41 @@ import tkinter
 from tkinter import *
 
 def send():
-    msg = EntryBox.get("1.0",'end-1c').strip()
+    msgClean = EntryBox.get("1.0",'end-1c')
+    msg = msgClean.strip()
     EntryBox.delete("0.0",END)
 
     if msg != '':
         ChatBox.config(state=NORMAL)
         ChatBox.insert(END, "You: " + msg + '\n\n')
         ChatBox.config(foreground="#446665", font=("Verdana", 12 ))
-    
+
         ints = predict_class(msg)
-        res = getResponse(ints, intents)
-        
-        ChatBox.insert(END, "Bot: " + res + '\n\n')
-            
+        if ints[0]['intent'] == "navigation":
+            building = getInfo(msgClean)
+            #TODO: Check if buildings are available
+            res = "Now navigating to " + building[1] + " from " + building[0]
+            #TODO: START CONVERSION TO GPS COORDINATES
+        elif ints[0]['intent'] == "exit":
+            res = getResponse(ints, intents)
+            #TODO: STOP EVERYTHING
+        else:
+            res = getResponse(ints, intents)
+        ChatBox.insert(END, "Belatrix: " + res + '\n\n')
+
         ChatBox.config(state=DISABLED)
         ChatBox.yview(END)
- 
+
 
 root = Tk()
 root.title("Chatbot")
 root.geometry("400x500")
 root.resizable(width=FALSE, height=FALSE)
+
+#import nlp dictionary
+nlp = spacy.load("en_core_web_sm")
+nltk.download('punkt')
+nltk.download('wordnet')
 
 #Create Chat window
 ChatBox = Text(root, bd=0, bg="white", height="8", width="50", font="Arial",)

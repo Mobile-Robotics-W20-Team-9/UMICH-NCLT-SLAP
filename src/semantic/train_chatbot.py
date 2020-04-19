@@ -17,6 +17,10 @@ ignore_letters = ['!', '?', ',', '.']
 intents_file = open('intents.json').read()
 intents = json.loads(intents_file)
 
+# download nltk resources
+nltk.download('punkt')
+nltk.download('wordnet')
+
 for intent in intents['intents']:
     for pattern in intent['patterns']:
         #tokenize each word
