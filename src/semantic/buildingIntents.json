@@ -1,0 +1,28 @@
+{"intents": [
+    {"tag": "Bob and Betty Beyster",
+     "patterns": ["BBB", "CSE", "CS","Computer Science", "Bob", "Bob and Betty Beyster", "Betty"],
+     "responses": ["Bob and Betty Beyster"],
+     "context": [""]
+    },
+    {"tag": "Duderstadt",
+     "patterns": ["Dude", "the Dude", "Duderstadt", "Mujos", "Library", "North Campus Library"],
+     "responses": ["Duderstadt"],
+     "context": [""]
+    },
+    {"tag": "FXB",
+     "patterns": ["FXB", "Francois-Xavier Bagnoud", "Aerospace", "Aerospace Engineering", "planes"],
+     "responses": ["FXB"],
+     "context": [""]
+    },
+    {"tag": "Electrical and Computer Engineering",
+     "patterns": ["Electrical and Computer Engineering","Electrical", "Electrical Engineering", "Computer Engineering", "Computer", "EECS", "ECE"],
+     "responses": ["Electrical and Computer Engineering"],
+     "context": [""]
+    },
+    {"tag": "Pierpont Commons",
+     "patterns": ["Pierpont", "Pierpont Commons", "Commons", "Panda Express"],
+     "responses": ["Pierpont Commons"],
+     "context": [""]
+    }
+]
+}

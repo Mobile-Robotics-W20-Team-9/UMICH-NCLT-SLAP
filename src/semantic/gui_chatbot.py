@@ -9,11 +9,15 @@ import spacy
 
 from keras.models import load_model
 model = load_model('chatbot_model.h5')
+modelBuilding = load_model('buildings_model.h5')
 import json
 import random
 intents = json.loads(open('intents.json').read())
 words = pickle.load(open('words.pkl','rb'))
 classes = pickle.load(open('classes.pkl','rb'))
+buildingsIntents = json.loads(open('buildingIntents.json').read())
+building_words = pickle.load(open('building_words.pkl','rb'))
+buildings = pickle.load(open('buildings.pkl','rb'))
 
 def clean_up_sentence(sentence):
     # tokenize the pattern - splitting words into array
@@ -24,13 +28,13 @@ def clean_up_sentence(sentence):
 
 
 # return bag of words array: 0 or 1 for words that exist in sentence
-def bag_of_words(sentence, words, show_details=True):
+def bag_of_words(sentence, wording, show_details=True):
     # tokenizing patterns
     sentence_words = clean_up_sentence(sentence)
     # bag of words - vocabulary matrix
-    bag = [0]*len(words)
+    bag = [0]*len(wording)
     for s in sentence_words:
-        for i,word in enumerate(words):
+        for i,word in enumerate(wording):
             if word == s:
                 # assign 1 if current word is in the vocabulary position
                 bag[i] = 1
@@ -51,18 +55,29 @@ def predict_class(sentence):
         return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
     return return_list
 
+def predict_building(currbuilding):
+    # filter below  threshold predictions
+    p = bag_of_words(currbuilding, building_words,show_details=False)
+    res = modelBuilding.predict(np.array([p]))[0]
+    ERROR_THRESHOLD = 0.5
+    results = [[i,r] for i,r in enumerate(res) if r>ERROR_THRESHOLD]
+    # sorting strength probability
+    results.sort(key=lambda x: x[1], reverse=True)
+    return_list = []
+    for r in results:
+        return_list.append({"buildingIntents": buildings[r[0]], "probability": str(r[1])})
+    return return_list
+
 def getResponse(ints, intents_json):
     tag = ints[0]['intent']
     list_of_intents = intents_json['intents']
-    print("ints")
-    print(ints)
     for i in list_of_intents:
         if(i['tag']== tag):
             result = random.choice(i['responses'])
             break
     return result
 
-def getInfo(sentence):
+def getBuildingInfo(sentence):
     doc = nlp(sentence)
     start = 0
     end = 0
@@ -101,9 +116,18 @@ def send():
 
         ints = predict_class(msg)
         if ints[0]['intent'] == "navigation":
-            building = getInfo(msgClean)
-            #TODO: Check if buildings are available
-            res = "Now navigating to " + building[1] + " from " + building[0]
+            currbuilding = getBuildingInfo(msgClean)
+            if currbuilding[0] == 'random location':
+                currbuilding[0] = buildings[random.randint(0, len(buildings)-1)] 
+                while currbuilding[0] == currbuilding[1]:
+                    currbuilding[1] = buildings[random.randint(0, len(buildings)-1)]
+            if currbuilding[1] == 'random location':
+                currbuilding[1] = buildings[random.randint(0, len(buildings)-1)]
+                while currbuilding[0] == currbuilding[1]:
+                    currbuilding[1] = buildings[random.randint(0, len(buildings)-1)]
+            fromBuild = predict_building(currbuilding[0])
+            toBuild = predict_building(currbuilding[1])
+            res = "Now navigating to " + toBuild[0]['buildingIntents'] + " from " + fromBuild[0]['buildingIntents']
             #TODO: START CONVERSION TO GPS COORDINATES
         elif ints[0]['intent'] == "exit":
             res = getResponse(ints, intents)
