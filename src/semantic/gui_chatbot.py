@@ -18,6 +18,7 @@ classes = pickle.load(open('classes.pkl','rb'))
 buildingsIntents = json.loads(open('buildingIntents.json').read())
 building_words = pickle.load(open('building_words.pkl','rb'))
 buildings = pickle.load(open('buildings.pkl','rb'))
+confirmation = 0
 
 def clean_up_sentence(sentence):
     # tokenize the pattern - splitting words into array
@@ -115,7 +116,15 @@ def send():
         ChatBox.config(foreground="#446665", font=("Verdana", 12 ))
 
         ints = predict_class(msg)
-        if ints[0]['intent'] == "navigation":
+        global confirmation
+        if (ints[0]['intent'] == "yes" or ints[0]['intent'] == "no") and confirmation == 1:
+            if ints[0]['intent'] == "yes":
+                res = "Starting navigation"
+            elif ints[0]['intent'] == "no":
+                res = "Cancelled operation"
+            confirmation = 0
+            #TODO: START CONVERSION TO GPS COORDINATES
+        elif ints[0]['intent'] == "navigation":
             currbuilding = getBuildingInfo(msgClean)
             if currbuilding[0] == 'random location':
                 currbuilding[0] = buildings[random.randint(0, len(buildings)-1)] 
@@ -127,11 +136,11 @@ def send():
                     currbuilding[1] = buildings[random.randint(0, len(buildings)-1)]
             fromBuild = predict_building(currbuilding[0])
             toBuild = predict_building(currbuilding[1])
-            res = "Now navigating to " + toBuild[0]['buildingIntents'] + " from " + fromBuild[0]['buildingIntents']
-            #TODO: START CONVERSION TO GPS COORDINATES
+            res = "You chose navigating to " + toBuild[0]['buildingIntents'] + " from " + fromBuild[0]['buildingIntents'] + ". Is this correct?"
+            confirmation = 1
         elif ints[0]['intent'] == "exit":
             res = getResponse(ints, intents)
-            #TODO: STOP EVERYTHING
+            #TODO: OPTIONAL STOP EVERYTHING
         else:
             res = getResponse(ints, intents)
         ChatBox.insert(END, "Belatrix: " + res + '\n\n')

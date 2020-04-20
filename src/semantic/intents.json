@@ -25,14 +25,24 @@
          "context": [""]
         },
         {"tag": "navigation",
-         "patterns": ["Can you take me to the ", "Open adverse drugs module", "Give me a list of drugs causing adverse behavior", "List all drugs suitable for patient with adverse reaction", "Which drugs dont have adverse reaction?" ],
-         "responses": ["Navigating to Adverse drug reaction module"],
+         "patterns": ["Can you take me to the ", "Take me to the building", "Map me to the location", "Navigate me to the building from the building"],
+         "responses": ["Starting Navigation"],
          "context": ["navigation_to_building"]
         },
         {"tag": "exit",
          "patterns": ["stop", "quit", "end", "I want to stop navigation"],
          "responses": ["Ending current navigation"],
          "context": ["navigation_to_building"]
+        },
+        {"tag": "yes",
+                "patterns": ["yes", "y", "sure", "right", "correct"],
+                "responses": ["I am sorry. I don't understand"],
+                "context": ["navigation_to_building"]
+        },
+        {"tag": "no",
+                "patterns": ["no", "nope", "n", "wrong", "incorrect"],
+                "responses": ["I am sorry. I don't understand"],
+                "context": ["navigation_to_building"]
         }
    ]
 }

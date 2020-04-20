@@ -1,6 +1,6 @@
 {"intents": [
     {"tag": "Bob and Betty Beyster",
-     "patterns": ["BBB", "CSE", "CS","Computer Science", "Bob", "Bob and Betty Beyster", "Betty"],
+     "patterns": ["BBB", "CSE", "CS","Computer Science", "Computer", "Bob", "Bob and Betty Beyster", "Betty"],
      "responses": ["Bob and Betty Beyster"],
      "context": [""]
     },
@@ -15,7 +15,7 @@
      "context": [""]
     },
     {"tag": "Electrical and Computer Engineering",
-     "patterns": ["Electrical and Computer Engineering","Electrical", "Electrical Engineering", "Computer Engineering", "Computer", "EECS", "ECE"],
+     "patterns": ["Electrical and Computer Engineering","Electrical", "Electrical Engineering", "Computer Engineering", "EECS", "ECE"],
      "responses": ["Electrical and Computer Engineering"],
      "context": [""]
     },
