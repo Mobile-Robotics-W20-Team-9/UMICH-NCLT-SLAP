@@ -14,7 +14,7 @@ building_words=[]
 buildings = []
 documents = []
 ignore_letters = ['!', '?', ',', '.']
-buildingIntents_file = open('buildingIntents.json').read()
+buildingIntents_file = open('intents/buildingIntents.json').read()
 buildingIntents = json.loads(buildingIntents_file)
 
 # download nltk resources
@@ -44,8 +44,8 @@ print (len(buildings), "buildings", buildings)
 # building_words = all building_words, vocabulary
 print (len(building_words), "unique lemmatized building_words", building_words)
 
-pickle.dump(building_words,open('building_words.pkl','wb'))
-pickle.dump(buildings,open('buildings.pkl','wb'))
+pickle.dump(building_words,open('pickles/building_words.pkl','wb'))
+pickle.dump(buildings,open('pickles/buildings.pkl','wb'))
 
 # create our training data
 training = []

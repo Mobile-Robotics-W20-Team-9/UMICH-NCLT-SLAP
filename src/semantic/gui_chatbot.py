@@ -12,12 +12,12 @@ model = load_model('chatbot_model.h5')
 modelBuilding = load_model('buildings_model.h5')
 import json
 import random
-intents = json.loads(open('intents.json').read())
-words = pickle.load(open('words.pkl','rb'))
-classes = pickle.load(open('classes.pkl','rb'))
-buildingsIntents = json.loads(open('buildingIntents.json').read())
-building_words = pickle.load(open('building_words.pkl','rb'))
-buildings = pickle.load(open('buildings.pkl','rb'))
+intents = json.loads(open('intents/intents.json').read())
+words = pickle.load(open('pickles/words.pkl','rb'))
+classes = pickle.load(open('pickles/classes.pkl','rb'))
+buildingsIntents = json.loads(open('intents/buildingIntents.json').read())
+building_words = pickle.load(open('pickles/building_words.pkl','rb'))
+buildings = pickle.load(open('pickles/buildings.pkl','rb'))
 confirmation = 0
 
 def clean_up_sentence(sentence):

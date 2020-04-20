@@ -14,7 +14,7 @@ words=[]
 classes = []
 documents = []
 ignore_letters = ['!', '?', ',', '.']
-intents_file = open('intents.json').read()
+intents_file = open('intents/intents.json').read()
 intents = json.loads(intents_file)
 
 # download nltk resources
@@ -44,8 +44,8 @@ print (len(classes), "classes", classes)
 # words = all words, vocabulary
 print (len(words), "unique lemmatized words", words)
 
-pickle.dump(words,open('words.pkl','wb'))
-pickle.dump(classes,open('classes.pkl','wb'))
+pickle.dump(words,open('pickles/words.pkl','wb'))
+pickle.dump(classes,open('pickles/classes.pkl','wb'))
 
 # create our training data
 training = []
