@@ -6,6 +6,8 @@ lemmatizer = WordNetLemmatizer()
 import pickle
 import numpy as np
 import spacy
+import tkinter
+from tkinter import *
 
 from keras.models import load_model
 model = load_model('chatbot_model.h5')
@@ -102,9 +104,6 @@ def getBuildingInfo(sentence):
 
 
 #Creating tkinter GUI
-import tkinter
-from tkinter import *
-
 def send():
     msgClean = EntryBox.get("1.0",'end-1c')
     msg = msgClean.strip()
@@ -119,7 +118,7 @@ def send():
         global confirmation
         if (ints[0]['intent'] == "yes" or ints[0]['intent'] == "no") and confirmation == 1:
             if ints[0]['intent'] == "yes":
-                res = "Starting navigation"
+                res = "Starting navigation. Please wait for process to complete. This may take a couple minutes."
             elif ints[0]['intent'] == "no":
                 res = "Cancelled operation"
             confirmation = 0
@@ -136,7 +135,7 @@ def send():
                     currbuilding[1] = buildings[random.randint(0, len(buildings)-1)]
             fromBuild = predict_building(currbuilding[0])
             toBuild = predict_building(currbuilding[1])
-            res = "You chose navigating to " + toBuild[0]['buildingIntents'] + " from " + fromBuild[0]['buildingIntents'] + ". Is this correct?"
+            res = "You chose navigating to " + toBuild[0]['buildingIntents'] + " building from " + fromBuild[0]['buildingIntents'] + " builing. Is this correct?"
             confirmation = 1
         elif ints[0]['intent'] == "exit":
             res = getResponse(ints, intents)

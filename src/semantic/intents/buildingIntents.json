@@ -1,6 +1,6 @@
 {"intents": [
     {"tag": "Bob and Betty Beyster",
-     "patterns": ["BBB", "CSE", "CS","Computer Science", "Computer", "Bob", "Bob and Betty Beyster", "Betty"],
+     "patterns": ["BBB", "CSE", "CS","Computer Science", "Computer", "Bob", "Bob and Betty Beyster", "Betty", "Computer Science Department", "CS Department"],
      "responses": ["Bob and Betty Beyster"],
      "context": [""]
     },
@@ -10,12 +10,12 @@
      "context": [""]
     },
     {"tag": "FXB",
-     "patterns": ["FXB", "Francois-Xavier Bagnoud", "Aerospace", "Aerospace Engineering", "planes"],
+     "patterns": ["FXB", "Francois-Xavier Bagnoud", "Aerospace", "aerospace", "Aerospace Engineering", "planes", "Aerospace Department", "Aerospace Engineering Department"],
      "responses": ["FXB"],
      "context": [""]
     },
     {"tag": "Electrical and Computer Engineering",
-     "patterns": ["Electrical and Computer Engineering","Electrical", "Electrical Engineering", "Computer Engineering", "EECS", "ECE"],
+     "patterns": ["Electrical and Computer Engineering","Electrical", "Electrical Engineering", "Computer Engineering", "EECS", "ECE", "Electrical Engineering Department", "EECS Department", "ECE Department"],
      "responses": ["Electrical and Computer Engineering"],
      "context": [""]
     },
