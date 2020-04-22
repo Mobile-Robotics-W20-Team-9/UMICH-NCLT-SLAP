@@ -21,6 +21,9 @@ buildingsIntents = json.loads(open('intents/buildingIntents.json').read())
 building_words = pickle.load(open('pickles/building_words.pkl','rb'))
 buildings = pickle.load(open('pickles/buildings.pkl','rb'))
 confirmation = 0
+startNav = 0 #TODO: START CONVERSION TO GPS COORDINATES
+completedNav = 0 #TODO: Add response once complete
+emergencyExit = 0 #TODO: OPTIONAL STOP EVERYTHING
 
 def clean_up_sentence(sentence):
     # tokenize the pattern - splitting words into array
@@ -116,14 +119,19 @@ def send():
 
         ints = predict_class(msg)
         global confirmation
-        if (ints[0]['intent'] == "yes" or ints[0]['intent'] == "no") and confirmation == 1:
+        global startNav
+        global emergencyExit
+        # adds rule based chatbot to confirm navigation
+        if (ints[0]['intent'] == "yes" or ints[0]['intent'] == "no") and confirmation == 1 and startNav == 0:
+            emergencyExit = 0
             if ints[0]['intent'] == "yes":
                 res = "Starting navigation. Please wait for process to complete. This may take a couple minutes."
+                startNav = 1
             elif ints[0]['intent'] == "no":
                 res = "Cancelled operation"
             confirmation = 0
-            #TODO: START CONVERSION TO GPS COORDINATES
-        elif ints[0]['intent'] == "navigation":
+        elif ints[0]['intent'] == "navigation" and startNav == 0:
+            emergencyExit = 0
             currbuilding = getBuildingInfo(msgClean)
             if currbuilding[0] == 'random location':
                 currbuilding[0] = buildings[random.randint(0, len(buildings)-1)] 
@@ -135,12 +143,17 @@ def send():
                     currbuilding[1] = buildings[random.randint(0, len(buildings)-1)]
             fromBuild = predict_building(currbuilding[0])
             toBuild = predict_building(currbuilding[1])
-            res = "You chose navigating to " + toBuild[0]['buildingIntents'] + " building from " + fromBuild[0]['buildingIntents'] + " builing. Is this correct?"
+            res = "You chose navigating to " + toBuild[0]['buildingIntents'] + " building from " + fromBuild[0]['buildingIntents'] + " building. Is this correct?"
             confirmation = 1
         elif ints[0]['intent'] == "exit":
             res = getResponse(ints, intents)
-            #TODO: OPTIONAL STOP EVERYTHING
+            startNav = 0
+            emergencyExit = 1
+        elif startNav == 1:
+            emergencyExit = 0
+            res = "Please wait while the navigation is processing"
         else:
+            emergencyExit = 0
             res = getResponse(ints, intents)
         ChatBox.insert(END, "Belatrix: " + res + '\n\n')
 
