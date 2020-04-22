@@ -14,6 +14,7 @@ RUN pip install -U pip && \
         matplotlib \
         nltk \
         setuptools \
-        pylint
+        pylint \
+        pickle-mixin
 
 CMD ["/bin/bash"]
