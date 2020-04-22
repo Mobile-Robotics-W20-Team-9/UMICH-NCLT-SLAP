@@ -1,0 +1,4 @@
+src/dataset/data/*
+!src/dataset/data/downloader.py
+.vscode
+__pycache__/
