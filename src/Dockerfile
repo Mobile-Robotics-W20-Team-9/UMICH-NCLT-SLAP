@@ -16,7 +16,6 @@ RUN pip install -U pip && \
         nltk \
         setuptools \
         pylint \
-<<<<<<< HEAD
         pickle-mixin \
         spacy \
         --upgrade setuptools \
@@ -24,8 +23,6 @@ RUN pip install -U pip && \
         keras
 
 RUN python -m spacy download en_core_web_sm
-=======
         pickle-mixin
->>>>>>> origin/master
 
 CMD ["/bin/bash"]
