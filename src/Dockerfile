@@ -16,8 +16,8 @@ RUN pip install -U pip && \
         nltk \
         setuptools \
         pylint \
-        spacy \
         pickle-mixin \
+        spacy \
         --upgrade setuptools \
         --no-cache-dir tensorflow \
         keras
