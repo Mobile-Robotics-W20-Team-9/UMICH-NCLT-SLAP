@@ -36,6 +36,14 @@
 - [Scipy](https://www.scipy.org/)
 - [Matplotlib](https://matplotlib.org/)
 - [Natural Language Toolkit](https://www.nltk.org/)
+- [Cpython](https://pypi.org/project/cPython/)
+- [NLTK](https://pypi.org/project/nltk/)
+- [Setup Tools](https://pypi.org/project/setuptools/)
+- [Pylint](https://pypi.org/project/pylint/)
+- [Spacy](https://pypi.org/project/spacy/)
+- [Pickle](https://pypi.org/project/pickle-mixin/)
+- [TensorFlow](https://pypi.org/project/tensorflow/)
+- [Keras](https://pypi.org/project/Keras/)
 
 ## Docker
 
@@ -49,3 +57,19 @@ After cloning the repo, start your docker machine and following commands shown b
 
 1. `cd /PATH/TO/UMICH_NCLT_SLAP/src`
 2. `docker-compose run --rm python-dev`
+
+### Semantic Language Parsing: Chatbot
+
+For standalone testing of the chatbot, run the following commands
+
+1. `cd /PATH/TO/UMICH_NCLT_SLAP/src/semantic`
+2. `python gui_chatbot.py`
+
+You can update the models by changing the intent or pickle files. Intent.json can be changed wiht a basic text editor and pickles can be read and changed using pickleManage.py.
+1. `cd /PATH/TO/UMICH_NCLT_SLAP/src/datset/dataManipulation/pickles`
+2. `python`
+3. `from pickleManage import *`
+4. Use desired functions. Functions are documented with examples in pickleManage.py file.
+To update the models are making changes run:
+'python 
+
