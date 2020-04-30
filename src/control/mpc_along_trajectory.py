@@ -3,7 +3,7 @@ from Astar import *
 
 poses = load_poses('pose_gt.csv')
 sparseness = 100
-print(poses.shape[0]/sparseness)
+# print(poses.shape[0]/sparseness)
 # plot_position(poses[1::sparseness])
 sparse_poses = poses[1::sparseness, 1:3]
 
@@ -16,8 +16,8 @@ goal_idx = np.random.randint(sparse_poses.shape[0])
 cur_node, parent_idx = Astar(start_idx, goal_idx, sparse_poses, k=20)
 path = find_path(cur_node, parent_idx, start_idx)
 # print(time.time() - start_time)
-print(start_idx, goal_idx)
-print(path)
+#print(start_idx, goal_idx)
+#print(path)
 # print(len(path))
 # print(total_dist(path))
 
