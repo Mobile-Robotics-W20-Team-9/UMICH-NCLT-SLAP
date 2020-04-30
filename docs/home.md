@@ -62,7 +62,9 @@ After cloning the repo, start your docker machine and following commands shown b
 
 For standalone testing of the chatbot, run the following commands
 
-1. `cd /PATH/TO/UMICH_NCLT_SLAP/src/semantic`
+1. `cd /PATH/TO/UMICH_NCLT_SLAP/semantic/src`
+2. `docker-compose run --rm python-dev`
+1. `cd app/semantic`
 2. `python gui_chatbot.py`
 
 You can update the models by changing the intent or pickle files. Intent.json can be changed wiht a basic text editor and pickles can be read and changed using pickleManage.py.
