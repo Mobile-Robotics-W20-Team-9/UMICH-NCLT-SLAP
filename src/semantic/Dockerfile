@@ -4,7 +4,8 @@ RUN apt-get update && \
     apt-get install -y \
         build-essential \
         python-opencv \
-        libpcl-dev
+        libpcl-dev \
+        x11-apps
 
 RUN pip install -U pip && \
     pip install -U \
@@ -15,6 +16,13 @@ RUN pip install -U pip && \
         nltk \
         setuptools \
         pylint \
+        pickle-mixin \
+        spacy \
+        --upgrade setuptools \
+        --no-cache-dir tensorflow \
+        keras
+
+RUN python -m spacy download en_core_web_sm
         pickle-mixin
 
 CMD ["/bin/bash"]
