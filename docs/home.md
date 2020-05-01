@@ -11,6 +11,7 @@
 - [Documentation](#documentation)
   - [Semantic Language Parsing: Chatbot](#semantic-language-parsing-chatbot)
   - [Particle Filter](#particle-filter)
+  - [Motion Planning](#motion-planning)
 
 ## Contributors
 
@@ -84,102 +85,41 @@ You can update the models by changing the intent or pickle files. Intent.json ca
 
 ### Particle Filter
 
-To run particle filter you have to use python 2.7. 
-Install the following dependencies
+To run particle filter, you can use the provided Dockerfile.
 
-1. `sudo apt install python-pip python-tk`
-2. `pip install numpy matplotlib open3d-python progressbar pyquaternion transforms3d scipy scikit-image networkx psutil`
-3. Install required dependencies including ray_tracing, pybind11, pytest, and Catch2
- `git clone https://github.com/catchorg/Catch2.git`
- 
- `mkdir Catch2/build`
- 
- `cd Catch2/build`
- 
- `cmake ..`
- 
- `make -j8`
- 
- `sudo make install`
-
-
- `pip install pytest`
-
-
- `git clone https://github.com/pybind/pybind11.git`
- 
- `mkdir pybind11/build`
- 
- `cd pybind11/build`
- 
- `cmake ..`
- 
- `make -j8`
- 
- `sudo make install`
-
-
-`git clone https://github.com/acschaefer/ray_tracing.git`
-
-`mkdir ray_tracing/build && cd ray_tracing/build`
-
-`cmake ..`
-
-`make -j8`
-
-`sudo make install`
-
-4. Download raw data from [NCLT](http://robots.engin.umich.edu/nclt/) to run code from scratch OR use our [prebuilt maps](https://drive.google.com/drive/folders/1cFf0q76xyul4nbShm-GwDNxFwYh1Bkzx?usp=sharing)
-
-4.1 The raw data can be downloaded from the website directly or using the downloader.py. If you are using the prebuilt maps, skip this step. 
-
-`cd src/dataset/`
-
-`python download.py --date="2012-01-15" --vel --gt --gt_cov --sensor`
-
-`cd nclt/sensors/<date>`
-
-`tar xzf <sensors_file>`
-
-`cd ../velodyne`
-
-`tar xzf <velodyne_file>`
-
-Repeat this for any interested datasets. We have maps made for 2012-01-15, 2012-01-08, 2013-04-05, and 2013-01-10.
-
-5. In ncltpoles.py we need to make a couple changes
-`cd src/polex/poles/`  
-
-Open and edit ncltpoles.py with your favorite editor.
-There are two # TODO comments. In the first one change 2020-04 to <year>-<month>. In the second one change the session to your desired session date. If you would like to run the exact experiment we did, do not change this date.
- 
- 6. In pynclt.py we need to make a couple changes
- `cd src/polex/poles`
- 
- Open and edit pynclt.py with your favorite editor.
- There are two # TODO comments. In the first one, change paths to the appropriate directories on your machine. In the second one, comment our the sessions you are not using. 
- 
- 7. Run it. WARNING this can take anywhere from 1 - 10 hours for 4 datasets. 
- `cd src/polex/poles`
- 
- `python2 ncltpoles.py`
+1. `cd /PATH/TO/UMICH_NCLT_SLAP/docker`
+2. `docker-compose run --rm particle-filter`
+3. Download data
+   1. Download raw data from [NCLT](http://robots.engin.umich.edu/nclt/) to run code from scratch
+      - The raw data can be downloaded from the website directly or using the downloader.py inside the docker container
+      - `cd /app/dataset/data`
+      - `python download.py --date="2012-01-15" --vel --gt --gt_cov --sensor`
+      - `cd /app/datasset/data/sensor_data/<date>`
+      - `tar xzf <sensors_file>`
+      - `cd ../velodyne_data`
+      - `tar xzf <velodyne_file>`
+   2. OR use our [prebuilt maps](https://drive.google.com/drive/folders/1cFf0q76xyul4nbShm-GwDNxFwYh1Bkzx?usp=sharing)
+   3. Repeat this for any interested datasets. We have maps made for 2012-01-15, 2012-01-08, 2013-04-05, and 2013-01-10.
+4. In ncltpoles.py we need to make a couple changes
+   - `cd src/polex/poles/`
+5. Open and edit ncltpoles.py with your favorite editor. There are two `TODO` comments. In the first one change 2020-04 to <year>-<month>. In the second one change the session to your desired session date. If you would like to run the exact experiment we did, do not change this date.
+6. In pynclt.py we need to make a couple changes
+   - `cd src/polex/poles`
+7. Open and edit pynclt.py with your favorite editor. There are two `TODO` comments. In the first one, change paths to the appropriate directories on your machine. In the second one, comment our the sessions you are not using.
+8. Run it. WARNING this can take anywhere from 1 - 10 hours for 4 datasets. 
+   - `cd src/polex/poles`
+   - `python2 ncltpoles.py`
  
 ### Motion Planning
 
-1. `cd src/dataset`
-
-2. `python download.py --date="2012-01-08" --gt`
-
-3. `cd ../planning`
-
-4. `python astar_demo.py`
-
-4.1. This saves the path as path.npy and generates an image, astar_path.png
-
-5. `python twist_demo.py`
-
-5.1. Does not produce output
-
-6. `interpolation.py`
-
-6.1. Produces a plot of smoothed position and velocity. 
+1. `cd /PATH/TO/UMICH_NCLT_SLAP/docker`
+2. `docker-compose run --rm planning`
+3. `cd /app/dataset/data`
+4. `python download.py --date="2012-01-08" --gt`
+5. `cd /app/planning`
+6. `python astar_demo.py`
+   - This saves the path as path.npy and generates an image, astar_path.png
+7. `python twist_demo.py`
+   - Does not produce output
+8. `interpolation.py`
+   - Produces a plot of smoothed position and velocity. 
