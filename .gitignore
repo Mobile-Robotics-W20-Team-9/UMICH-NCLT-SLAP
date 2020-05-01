@@ -9,4 +9,5 @@ src/dataset/data/*
 src/dataset/nclt
 !src/dataset/data/*.py
 
-__pycache__
+# Ignore pycache
+__pycache__/
