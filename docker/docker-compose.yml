@@ -5,19 +5,73 @@ version: '3'
 
 # Define services
 services:
-    # Python Development Container
-    python-dev:
-        # Use Dockerfile in current folder
-        build: .
+    # Particle filter Container
+    particle-filter:
+        # Use Dockerfile in particle-filter folder
+        build: ./particle-filter
+        # Mount folders on host to app folder in container
+        volumes:
+            - ../src/dataset:/app/dataset
+            - ../src/polex:/app/polex
+        # Set DISPLAY variable and network mode for GUIs
+        environment:
+            - DISPLAY=${IP_ADDRESS}:0.0
+        network_mode: "host"
+        # Set working directory in container to app folder
+        working_dir: /app
+    
+    # Planning Container
+    planning:
+        # Use Dockerfile in planning folder
+        build: ./planning
+        # Mount folders on host to app folder in container
+        volumes:
+            - ../src/dataset:/app/dataset
+            - ../src/planning:/app/planning
+        # Set DISPLAY variable and network mode for GUIs
+        environment:
+            - DISPLAY=${IP_ADDRESS}:0.0
+        network_mode: "host"
+        # Set working directory in container to app folder
+        working_dir: /app
+    
+    # Semantic Container
+    semantic:
+        # Use Dockerfile in semantic folder
+        build: ./semantic
+        # Mount folders on host to app folder in container
+        volumes:
+            - ../src/semantic:/app/semantic
+        # Set DISPLAY variable and network mode for GUIs
+        environment:
+            - DISPLAY=${IP_ADDRESS}:0.0
+        network_mode: "host"
+        # Set working directory in container to app folder
+        working_dir: /app
+    
+    # Visualization Container
+    visualization:
+        # Use Dockerfile in visualization folder
+        build: ./visualization
+        # Mount folders on host to app folder in container
+        volumes:
+            - ../src/dataset:/app/dataset
+            - ../src/visualization:/app/visualization
+        # Set DISPLAY variable and network mode for GUIs
+        environment:
+            - DISPLAY=${IP_ADDRESS}:0.0
+        network_mode: "host"
+        # Set working directory in container to app folder
+        working_dir: /app
+
+    # Velocity Control Container
+    velocity-control:
+        # Use Dockerfile in velocity-control folder
+        build: ./velocity-control
         # Mount folders on host to app folder in container
         volumes:
             - ../src/control:/app/control
             - ../src/dataset:/app/dataset
-            - ../src/localization:/app/localization
-            - ../src/planning:/app/planning
-            - ../src/semantic:/app/semantic
-            - ../src/visualization:/app/visualization
-            - ../src/polex:/app/polex
         # Set DISPLAY variable and network mode for GUIs
         environment:
             - DISPLAY=${IP_ADDRESS}:0.0

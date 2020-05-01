@@ -35,7 +35,7 @@ def verify_magic(s):
 def main(args):
 
     if len(sys.argv) < 2:
-        print "Please specifiy input bin file"
+        print("Please specify input bin file")
         return 1
 
     f_bin = open(sys.argv[1], "r")
@@ -51,14 +51,14 @@ def main(args):
             break
 
         if not verify_magic(magic):
-            print "Could not verify magic"
+            print("Could not verify magic")
 
         num_hits = struct.unpack('<I', f_bin.read(4))[0]
         utime = struct.unpack('<Q', f_bin.read(8))[0]
 
         padding = f_bin.read(4) # padding
 
-        print "Have %d hits for utime %ld" % (num_hits, utime)
+        print("Have %d hits for utime %ld" % (num_hits, utime))
 
         total_hits += num_hits
         if first_utime == -1:
@@ -82,7 +82,7 @@ def main(args):
 
     f_bin.close()
 
-    print "Read %d total hits from %ld to %ld" % (total_hits, first_utime, last_utime)
+    print("Read %d total hits from %ld to %ld" % (total_hits, first_utime, last_utime))
 
     return 0
 

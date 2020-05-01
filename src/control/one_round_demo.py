@@ -1,6 +1,6 @@
 from mpc_func import *
 
-poses = load_poses('pose_gt.csv')
+poses = load_poses('/app/dataset/data/pose_gt.csv')
 sparseness = 100
 sparse_poses = poses[1::sparseness, 1:3]
 

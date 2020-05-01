@@ -23,8 +23,7 @@ def load_poses(pose_gt_file) :
 
 
 def main() :
-  #poses = load_poses('../dataset/ground_truth/groundtruth_2012-01-08.csv')
-  poses = load_poses('../dataset/ground_truth/debug.csv')
+  poses = load_poses('../dataset/data/ground_truth/debug.csv')
   sparseness = 10
   k=50
 
