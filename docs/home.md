@@ -5,6 +5,7 @@
 - [Project Resources](#project-resources)
 - [Dataset](#dataset)
 - [Libraries](#libraries)
+- [Cloning Repository](#cloning-repository)
 - [Docker](#docker)
   - [Install & Setup](#install--setup)
   - [Running Container](#running-container)
@@ -52,6 +53,22 @@
 - [Pickle](https://pypi.org/project/pickle-mixin/)
 - [TensorFlow](https://pypi.org/project/tensorflow/)
 - [Keras](https://pypi.org/project/Keras/)
+
+## Cloning Repository
+
+Due to the use of a submodule, there is an extra step necessary to fully clone this repository.
+
+- Clone the repo using HTTPS or SSH
+  - HTTPS: `git clone https://github.com/Mobile-Robotics-W20-Team-9/UMICH-NCLT-SLAP.git`
+  - SSH: `git clone git@github.com:Mobile-Robotics-W20-Team-9/UMICH-NCLT-SLAP.git`
+- Go to cloned repository
+  - `cd /PATH/TO/UMICH-NCLT-SLAP/`
+- Initialize submodules
+  - `git submodule init`
+- Update submodule
+  - `git submodule update`
+
+Now you should have a cloned version of our fork of the [Polex](https://github.com/Mobile-Robotics-W20-Team-9/polex) repository in the `/PATH/TO/UMICH-NCLT-SLAP/src/polex` folder.
 
 ## Docker
 
