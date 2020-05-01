@@ -33,6 +33,7 @@
 - [Video Summary](https://youtu.be/4xinp3mZIP0)
 - [Presentation from Video](https://docs.google.com/presentation/d/1PUHZjGNijsOMJ2KPXF_PAGO-eqZTLd085ZuNPc3VSsI/edit?usp=sharing)
 - [Generated Models from NCLT Data](https://drive.google.com/drive/folders/1cFf0q76xyul4nbShm-GwDNxFwYh1Bkzx?usp=sharing)
+- [Final Report](Mobile_Robotics_NCLT_SLAP.pdf)
 
 ## Dataset
 
