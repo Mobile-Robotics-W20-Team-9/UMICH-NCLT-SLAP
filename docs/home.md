@@ -164,3 +164,14 @@ There are two # TODO comments. In the first one change 2020-04 to <year>-<month>
  
  `python2 ncltpoles.py`
  
+### Motion Planning
+
+1. `cd src/dataset`
+2. `python download.py --date="2012-01-08" --gt`
+3. `cd ../planning`
+4. `python astar_demo.py`
+4.1. This saves the path as path.npy and generates an image, astar_path.png
+5. `python twist_demo.py`
+5.1. Does not produce output
+6. `interpolation.py`
+6.1. Produces a plot of smoothed position and velocity. 
