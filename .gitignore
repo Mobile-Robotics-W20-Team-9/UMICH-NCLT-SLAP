@@ -1,0 +1,13 @@
+# Visual Studio Code
+.vscode
+
+# Docker compose environment variables
+.env
+
+# Ignore downloaded dataset files
+src/dataset/data/*
+src/dataset/nclt
+!src/dataset/data/*.py
+
+# Ignore pycache
+__pycache__/
