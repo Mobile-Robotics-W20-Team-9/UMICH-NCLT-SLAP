@@ -8,3 +8,5 @@
 src/dataset/data/*
 src/dataset/nclt
 !src/dataset/data/*.py
+
+__pycache__
