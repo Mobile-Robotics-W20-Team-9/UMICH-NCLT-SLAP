@@ -1,0 +1,4 @@
+[submodule "polex"]
+	path = src/polex
+	url = https://github.com/Mobile-Robotics-W20-Team-9/polex.git
+	branch = master

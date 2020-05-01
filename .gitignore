@@ -1,6 +1,10 @@
 # Visual Studio Code
 .vscode
 
+# Docker compose environment variables
+.env
+
 # Ignore downloaded dataset files
-src/dataset/*
-!src/dataset/*.py
+src/dataset/data/*
+src/dataset/nclt
+!src/dataset/data/*.py
