@@ -1,7 +1,12 @@
+import sys
 from mpc_func import *
 from Astar import *
 
-poses = load_poses('/app/dataset/data/pose_gt.csv')
+try:
+    poses = load_poses(sys.argv[1])
+except:
+    print('Please use the right .csv file!')
+
 sparseness = 100
 # print(poses.shape[0]/sparseness)
 # plot_position(poses[1::sparseness])

@@ -12,6 +12,7 @@
   - [Semantic Language Parsing: Chatbot](#semantic-language-parsing-chatbot)
   - [Particle Filter](#particle-filter)
   - [Motion Planning](#motion-planning)
+  - [Velocity Control: MPC](#velocity-control-mpc)
 
 ## Contributors
 
@@ -123,3 +124,13 @@ To run particle filter, you can use the provided Dockerfile.
    - Does not produce output
 8. `interpolation.py`
    - Produces a plot of smoothed position and velocity. 
+
+### Velocity Control: MPC
+
+Even though the velocity control is not finally integrated into the whole navigation, you can still run it for short-term trajectory tracking combined with A* algorithm. There are two demos can be tested: single-round demo and the mpc along the whole trajectory. Both of them require a .csv file which includes the ground-truth poses of the whole graph map.
+
+Run the following commands to test:
+
+1. `cd /PATH/TO/UMICH_NCLT_SLAP/src/control`
+2. `docker-compose run --rm velocity-control`
+3. `python one_round_demo.py /PATH/TO/YOUR/.csv_FILE` or `python mpc_along_trajectory.py /PATH/TO/YOUR/.csv_FILE`

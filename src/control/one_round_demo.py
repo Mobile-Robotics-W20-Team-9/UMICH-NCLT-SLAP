@@ -1,6 +1,11 @@
+import sys
 from mpc_func import *
 
-poses = load_poses('/app/dataset/data/pose_gt.csv')
+try:
+    poses = load_poses(sys.argv[1])
+except:
+    print('Please use the right .csv file!')
+
 sparseness = 100
 sparse_poses = poses[1::sparseness, 1:3]
 
