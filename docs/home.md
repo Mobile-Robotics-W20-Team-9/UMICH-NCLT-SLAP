@@ -75,3 +75,11 @@ You can update the models by changing the intent or pickle files. Intent.json ca
 To update the models are making changes run:
 'python 
 
+
+### Velocity Control: MPC
+Even though the velocity control is not finally integrated into the whole navigation, you can still run it for short-term trajectory tracking combined with A* algorithm. There are two demos can be tested: single-round demo and the mpc along the whole trajectory. Both of them require a .csv file which includes the ground-truth poses of the whole graph map.
+Run the following commands to test:
+1. `cd  /PATH/TO/UMICH_NCLT_SLAP/src/control`
+2. `docker-compose run --rm python-dev`
+3. `python one_round_demo.py /PATH TO YOUR .csv FILE` or `python mpc_along_trajectory.py /PATH TO YOUR .csv FILE`
+
