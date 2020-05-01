@@ -1,0 +1,26 @@
+# Docker Compose
+
+# docker-compose.yml format version
+version: '3'
+
+# Define services
+services:
+    # Python Development Container
+    python-dev:
+        # Use Dockerfile in current folder
+        build: .
+        # Mount folders on host to app folder in container
+        volumes:
+            - ../src/control:/app/control
+            - ../src/dataset:/app/dataset
+            - ../src/localization:/app/localization
+            - ../src/planning:/app/planning
+            - ../src/semantic:/app/semantic
+            - ../src/visualization:/app/visualization
+            - ../src/polex:/app/polex
+        # Set DISPLAY variable and network mode for GUIs
+        environment:
+            - DISPLAY=${IP_ADDRESS}:0.0
+        network_mode: "host"
+        # Set working directory in container to app folder
+        working_dir: /app

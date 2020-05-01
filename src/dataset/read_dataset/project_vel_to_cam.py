@@ -120,7 +120,7 @@ def project_vel_to_cam(hits, cam_num):
 def main(args):
 
     if len(args)<4:
-        print  """Incorrect usage.
+        print("""Incorrect usage.
 
 To use:
 
@@ -129,7 +129,7 @@ To use:
       vel:  The velodyne binary file (timestamp.bin)
       img:  The undistorted image (timestamp.tiff)
   cam_num:  The index (0 through 5) of the camera
-"""
+  """)
         return 1
 
 
