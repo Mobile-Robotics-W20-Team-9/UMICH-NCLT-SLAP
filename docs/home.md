@@ -157,7 +157,7 @@ There are two # TODO comments. In the first one change 2020-04 to <year>-<month>
  `cd src/polex/poles`
  
  Open and edit pynclt.py with your favorite editor.
- There are two # TODO comments. In the first one, change paths to the appropraite directories on your machine. In the second one, comment our the sessions you are not using. 
+ There are two # TODO comments. In the first one, change paths to the appropriate directories on your machine. In the second one, comment our the sessions you are not using. 
  
  7. Run it. WARNING this can take anywhere from 1 - 10 hours for 4 datasets. 
  `cd src/polex/poles`
