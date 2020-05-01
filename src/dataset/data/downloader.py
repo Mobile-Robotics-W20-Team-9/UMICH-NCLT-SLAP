@@ -9,7 +9,7 @@ import argparse
 
 base_dir = 'http://robots.engin.umich.edu/nclt'
 
-dates = [];
+dates = []
 dates.append('2012-01-08')
 dates.append('2012-01-15')
 dates.append('2012-01-22')
