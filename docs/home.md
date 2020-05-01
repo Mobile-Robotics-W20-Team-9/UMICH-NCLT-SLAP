@@ -33,6 +33,7 @@
 - [Video Summary](https://youtu.be/4xinp3mZIP0)
 - [Presentation from Video](https://docs.google.com/presentation/d/1PUHZjGNijsOMJ2KPXF_PAGO-eqZTLd085ZuNPc3VSsI/edit?usp=sharing)
 - [Generated Models from NCLT Data](https://drive.google.com/drive/folders/1cFf0q76xyul4nbShm-GwDNxFwYh1Bkzx?usp=sharing)
+- [Project Report](https://www.overleaf.com/read/ktshtqzyzmxt)
 
 ## Dataset
 
@@ -83,4 +84,83 @@ You can update the models by changing the intent or pickle files. Intent.json ca
 
 ### Particle Filter
 
-<!-- TODO: Add instructions for running particle filter code -->
+To run particle filter you have to use python 2.7. 
+Install the following dependencies
+
+1. `sudo apt install python-pip python-tk`
+2. `pip install numpy matplotlib open3d-python progressbar pyquaternion transforms3d scipy scikit-image networkx psutil`
+3. Install required dependencies including ray_tracing, pybind11, pytest, and Catch2
+ `git clone https://github.com/catchorg/Catch2.git`
+ 
+ `mkdir Catch2/build`
+ 
+ `cd Catch2/build`
+ 
+ `cmake ..`
+ 
+ `make -j8`
+ 
+ `sudo make install`
+
+
+ `pip install pytest`
+
+
+ `git clone https://github.com/pybind/pybind11.git`
+ 
+ `mkdir pybind11/build`
+ 
+ `cd pybind11/build`
+ 
+ `cmake ..`
+ 
+ `make -j8`
+ 
+ `sudo make install`
+
+
+`git clone https://github.com/acschaefer/ray_tracing.git`
+
+`mkdir ray_tracing/build && cd ray_tracing/build`
+
+`cmake ..`
+
+`make -j8`
+
+`sudo make install`
+
+4. Download raw data from [NCLT](http://robots.engin.umich.edu/nclt/) to run code from scratch OR use our [prebuilt maps](https://drive.google.com/drive/folders/1cFf0q76xyul4nbShm-GwDNxFwYh1Bkzx?usp=sharing)
+
+4.1 The raw data can be downloaded from the website directly or using the downloader.py. If you are using the prebuilt maps, skip this step. 
+
+`cd src/dataset/`
+
+`python download.py --date="2012-01-15" --vel --gt --gt_cov --sensor`
+
+`cd nclt/sensors/<date>`
+
+`tar xzf <sensors_file>`
+
+`cd ../velodyne`
+
+`tar xzf <velodyne_file>`
+
+Repeat this for any interested datasets. We have maps made for 2012-01-15, 2012-01-08, 2013-04-05, and 2013-01-10.
+
+5. In ncltpoles.py we need to make a couple changes
+`cd src/polex/poles/`  
+
+Open and edit ncltpoles.py with your favorite editor.
+There are two # TODO comments. In the first one change 2020-04 to <year>-<month>. In the second one change the session to your desired session date. If you would like to run the exact experiment we did, do not change this date.
+ 
+ 6. In pynclt.py we need to make a couple changes
+ `cd src/polex/poles`
+ 
+ Open and edit pynclt.py with your favorite editor.
+ There are two # TODO comments. In the first one, change paths to the appropriate directories on your machine. In the second one, comment our the sessions you are not using. 
+ 
+ 7. Run it. WARNING this can take anywhere from 1 - 10 hours for 4 datasets. 
+ `cd src/polex/poles`
+ 
+ `python2 ncltpoles.py`
+ 
