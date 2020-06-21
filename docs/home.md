@@ -74,7 +74,7 @@ Now you should have a cloned version of our fork of the [Polex](https://github.c
 
 ### Install & Setup
 
-For instructions on installing and setting up Docker, see [Getting Started with Docker](https://sravanbalaji.com/Web%20Pages/blog_docker.html) on Sravan's website.
+For instructions on installing and setting up Docker, see [Getting Started with Docker](https://sravanbalaji.com/blog_posts/blog_docker.html) on Sravan's website.
 
 ### Running Container
 
